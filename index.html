@@ -4,17 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Festina Lente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+</style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen">
-  <div class="max-w-screen-md mx-auto px-6 py-12">
-    <div class="mb-10">
-      <h1 class="text-3xl font-bold text-white mb-2">🐬⚓ Festina Lente</h1>
-      <p class="text-slate-400 text-sm">Make haste, slowly.</p>
+<body class="bg-black text-zinc-200 min-h-screen">
+  <div class="max-w-screen-md mx-auto px-6 py-16">
+
+    <pre class="text-zinc-500 text-xs leading-relaxed mb-10 whitespace-pre-wrap">/*
+ * "Do you want to take the leap of faith,
+ *  or become an old man, full of regret,
+ *  waiting to die?"
+ *                                — Inception
+ */</pre>
+
+    <div class="mb-12">
+      <h1 class="text-2xl font-bold text-zinc-100 mb-1 tracking-tight">festina_lente</h1>
+      <p class="text-zinc-500 text-sm">// make haste, slowly</p>
     </div>
-    <div id="progress" class="mb-10"></div>
-    <div id="list" class="space-y-8"></div>
-    <p class="text-center text-slate-600 text-xs mt-12">Updated by editing items.json and pushing to git.</p>
+
+    <div id="progress" class="mb-12"></div>
+    <div id="list" class="space-y-10"></div>
+
+    <p class="text-center text-zinc-700 text-xs mt-16">// updated by editing items.json and pushing to git</p>
   </div>
 
 <script>
@@ -27,20 +43,20 @@ function render(items) {
   const pct = items.length ? Math.round(done / items.length * 100) : 0;
 
   document.getElementById('progress').innerHTML = `
-    <div class="flex items-center justify-between text-sm text-slate-400 mb-2">
-      <span>${done} of ${items.length} done</span>
+    <div class="flex items-center justify-between text-xs text-zinc-500 mb-2">
+      <span>${done} / ${items.length} done</span>
       <span>${pct}%</span>
     </div>
-    <div class="w-full bg-slate-800 rounded-full h-2">
-      <div class="bg-emerald-500 h-2 rounded-full transition-all" style="width:${pct}%"></div>
+    <div class="w-full bg-zinc-900 h-px">
+      <div class="bg-zinc-400 h-px" style="width:${pct}%"></div>
     </div>`;
 
   const categories = [...new Set(items.map(i => i.category))];
 
   document.getElementById('list').innerHTML = categories.map(cat => `
     <div>
-      <h2 class="text-slate-500 text-xs uppercase tracking-wide mb-3">${cat}</h2>
-      <div class="space-y-2">
+      <h2 class="text-zinc-500 text-xs mb-3">// ${cat.toLowerCase()}</h2>
+      <div class="space-y-1">
         ${items.filter(i => i.category === cat).map(itemHtml).join('')}
       </div>
     </div>
@@ -48,14 +64,11 @@ function render(items) {
 }
 
 function itemHtml(item) {
+  const dateTag = item.done && item.dateCompleted ? ` <span class="text-zinc-600">(${item.dateCompleted})</span>` : '';
   return `
-    <div class="flex items-start gap-3 bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 ${item.done ? 'opacity-50' : ''}">
-      <div class="mt-0.5 text-lg">${item.done ? '✅' : '⬜'}</div>
-      <div class="flex-1">
-        <p class="text-white text-sm ${item.done ? 'line-through text-slate-500' : ''}">${item.text}</p>
-        ${item.done && item.dateCompleted ? `<p class="text-emerald-500 text-xs mt-1">Done · ${item.dateCompleted}</p>` : ''}
-        ${item.note ? `<p class="text-slate-500 text-xs mt-1">${item.note}</p>` : ''}
-      </div>
+    <div class="flex items-start gap-3 text-sm py-1 ${item.done ? 'text-zinc-600' : 'text-zinc-200'}">
+      <span class="text-zinc-500">[${item.done ? 'x' : ' '}]</span>
+      <span class="${item.done ? 'line-through' : ''}">${item.text}${dateTag}</span>
     </div>`;
 }
 </script>

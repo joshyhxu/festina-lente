@@ -15,10 +15,11 @@ Live at: `https://<your-github-username>.github.io/festina-lente`
 {
   "text": "What you want to do",
   "category": "Travel",
-  "done": false,
-  "note": ""
+  "done": false
 }
 ```
+
+Categories currently in use: `UK`, `Skills`, `Career`, `Experiences`, `Travel`.
 
    When you finish something, set `"done": true` and add `"dateCompleted": "YYYY-MM-DD"`.
 
