@@ -1,8 +1,10 @@
-# The Scenic Route
+# Festina Lente
 
-A public bucket list. Not the fastest way through life — the one worth remembering.
+*Make haste, slowly.*
 
-Live at: `https://<your-github-username>.github.io/the-scenic-route`
+A public bucket list.
+
+Live at: `https://<your-github-username>.github.io/festina-lente`
 
 ## How to add or check off an item
 
