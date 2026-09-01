@@ -1,0 +1,21 @@
+[
+  {
+    "text": "Example — replace me: watch cherry blossoms in Japan",
+    "category": "Travel",
+    "done": false,
+    "note": ""
+  },
+  {
+    "text": "Example — replace me: cook a meal for friends from scratch",
+    "category": "Connection",
+    "done": false,
+    "note": ""
+  },
+  {
+    "text": "Example — replace me: run a marathon somewhere I've never been",
+    "category": "Adventure",
+    "done": true,
+    "dateCompleted": "2026-01-01",
+    "note": ""
+  }
+]
