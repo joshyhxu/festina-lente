@@ -27,10 +27,9 @@
       <p class="text-zinc-500 text-sm">// make haste, slowly</p>
     </div>
 
-    <div id="progress" class="mb-12"></div>
     <div id="list" class="space-y-10"></div>
 
-    <p class="text-center text-zinc-700 text-xs mt-16">// updated by editing items.json and pushing to git</p>
+    <p class="text-center text-zinc-700 text-xs mt-16">// things worth doing, not things worth tracking</p>
   </div>
 
 <script>
@@ -39,18 +38,6 @@ fetch('items.json')
   .then(render);
 
 function render(items) {
-  const done = items.filter(i => i.done).length;
-  const pct = items.length ? Math.round(done / items.length * 100) : 0;
-
-  document.getElementById('progress').innerHTML = `
-    <div class="flex items-center justify-between text-xs text-zinc-500 mb-2">
-      <span>${done} / ${items.length} done</span>
-      <span>${pct}%</span>
-    </div>
-    <div class="w-full bg-zinc-900 h-px">
-      <div class="bg-zinc-400 h-px" style="width:${pct}%"></div>
-    </div>`;
-
   const categories = [...new Set(items.map(i => i.category))];
 
   document.getElementById('list').innerHTML = categories.map(cat => `
@@ -64,11 +51,11 @@ function render(items) {
 }
 
 function itemHtml(item) {
-  const dateTag = item.done && item.dateCompleted ? ` <span class="text-zinc-600">(${item.dateCompleted})</span>` : '';
+  const dateTag = item.done && item.dateCompleted ? ` <span class="text-zinc-600">— ${item.dateCompleted}</span>` : '';
   return `
-    <div class="flex items-start gap-3 text-sm py-1 ${item.done ? 'text-zinc-600' : 'text-zinc-200'}">
-      <span class="text-zinc-500">[${item.done ? 'x' : ' '}]</span>
-      <span class="${item.done ? 'line-through' : ''}">${item.text}${dateTag}</span>
+    <div class="flex items-start gap-3 text-sm py-1 text-zinc-200">
+      <span class="text-zinc-600">-</span>
+      <span>${item.text}${dateTag}</span>
     </div>`;
 }
 </script>
