@@ -1,0 +1,71 @@
+# Festina Lente — the list
+#
+# Lines starting with > are category headings.
+# Everything else is an item, one per line.
+# Finished something? Add  -- YYYY-MM-DD  to the end of its line.
+# Blank lines and lines starting with # are ignored.
+
+> UK
+Edinburgh Festival
+Cheddar Gorge
+Bath's Roman Baths
+Climb Mount Snowdon
+Guinness in Dublin
+See the Giant's Causeway
+Climb Ben Nevis
+Cheese rolling at Cooper's Hill
+Bletchley Park
+Climb the O2
+Eden Project
+
+> Skills
+Learn how to use R
+HSK3 Mandarin
+Learn to play Interstellar on the organ
+Learn to dance
+Start a Substack
+Build a website
+Learn barista skills
+
+> Career
+Present at ESC
+Present at ACC
+Run a clinical trial
+
+> Experiences
+Go zorbing
+Scuba diving
+Skydiving
+Skiing
+New York for Christmas
+Ride in a hot air balloon
+Fly in a helicopter
+Swim with dolphins
+Drive a quad bike
+Jet ski
+Take a cruise
+See an active volcano
+Watch a NASA rocket launch
+Play with elephants
+
+> Travel
+Oktoberfest in Munich
+Japan
+Christ the Redeemer, Rio de Janeiro
+Trek Machu Picchu
+Dive the Great Barrier Reef
+Safari in Africa
+Pyramids of Giza
+See the Northern Lights
+Travel on a yacht
+Thailand
+Yosemite National Park
+San Francisco
+Spend a night in an igloo village
+See the Iguazu Falls
+See the Taj Mahal
+Easter Island
+Las Vegas
+Sydney Opera House
+Petra
+Balloon ride over Cappadocia

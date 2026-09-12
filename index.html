@@ -33,30 +33,74 @@
   </div>
 
 <script>
-fetch('items.json')
-  .then(r => r.json())
-  .then(render);
+fetch('items.txt?v=' + Date.now())
+  .then(function (r) { return r.text(); })
+  .then(render)
+  .catch(function () {
+    document.getElementById('list').innerHTML =
+      '<p class="text-zinc-600 text-sm">// could not load the list</p>';
+  });
 
-function render(items) {
-  const categories = [...new Set(items.map(i => i.category))];
+function esc(s) {
+  return s.replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
 
-  document.getElementById('list').innerHTML = categories.map(cat => `
-    <div>
-      <h2 class="text-zinc-500 text-xs mb-3">// ${cat.toLowerCase()}</h2>
-      <div class="space-y-1">
-        ${items.filter(i => i.category === cat).map(itemHtml).join('')}
-      </div>
-    </div>
-  `).join('');
+// Parses items.txt.
+//   "> Travel"                  -> a category heading
+//   "Climb Ben Nevis"           -> an item
+//   "Climb Ben Nevis -- 2026-08-15" -> a finished item, with the date shown
+//   blank lines and lines starting with # are ignored
+function parse(text) {
+  var groups = [];
+  var current = null;
+
+  text.split(/\r?\n/).forEach(function (raw) {
+    var line = raw.trim();
+    if (!line || line.charAt(0) === '#') return;
+
+    if (line.charAt(0) === '>') {
+      current = { category: line.slice(1).trim(), items: [] };
+      groups.push(current);
+      return;
+    }
+
+    if (!current) {
+      current = { category: 'list', items: [] };
+      groups.push(current);
+    }
+
+    var date = null;
+    var text_ = line;
+    var m = line.match(/^(.*?)\s*--\s*(\d{4}-\d{2}-\d{2})\s*$/);
+    if (m) { text_ = m[1].trim(); date = m[2]; }
+
+    if (text_) current.items.push({ text: text_, date: date });
+  });
+
+  return groups.filter(function (g) { return g.items.length; });
+}
+
+function render(text) {
+  var groups = parse(text);
+
+  document.getElementById('list').innerHTML = groups.map(function (g) {
+    return '<div>' +
+      '<h2 class="text-zinc-500 text-xs mb-3">// ' + esc(g.category.toLowerCase()) + '</h2>' +
+      '<div class="space-y-1">' + g.items.map(itemHtml).join('') + '</div>' +
+    '</div>';
+  }).join('');
 }
 
 function itemHtml(item) {
-  const dateTag = item.done && item.dateCompleted ? ` <span class="text-zinc-600">— ${item.dateCompleted}</span>` : '';
-  return `
-    <div class="flex items-start gap-3 text-sm py-1 text-zinc-200">
-      <span class="text-zinc-600">-</span>
-      <span>${item.text}${dateTag}</span>
-    </div>`;
+  var dateTag = item.date
+    ? ' <span class="text-zinc-600">— ' + esc(item.date) + '</span>'
+    : '';
+  return '<div class="flex items-start gap-3 text-sm py-1 text-zinc-200">' +
+           '<span class="text-zinc-600">-</span>' +
+           '<span>' + esc(item.text) + dateTag + '</span>' +
+         '</div>';
 }
 </script>
 </body>
